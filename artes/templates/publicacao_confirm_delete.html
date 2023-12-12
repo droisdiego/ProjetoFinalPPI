@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block center %}
+  <h2>Confirmar Exclusão</h2>
+  <p>Você tem certeza que deseja excluir a publicação?</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirmar Exclusão</button>
+  </form>
+  
+  <a href="{% url 'index' %}">Cancelar</a>
+{% endblock %}
