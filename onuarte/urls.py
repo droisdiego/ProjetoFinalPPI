@@ -26,5 +26,5 @@ urlpatterns = [
     path('criar_publicacao/', PublicacaoCreateView.as_view(), name='criar_publicacao'),
     path('publicacao/<int:pk>/delete/', PublicacaoDeleteView.as_view(), name='publicacao_delete'),
     path('publicacao/<int:pk>/editar/', PublicacaoUpdate.as_view(), name='editar_publicacao'),
-
+    path('publicacao/detail/<int:pk>/', PublicacaoDetailView.as_view(), name='publicacao_detalhe'),
 ]

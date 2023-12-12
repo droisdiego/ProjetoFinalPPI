@@ -19,8 +19,13 @@
           <p>{{ publicacao.texto }}</p>
           <p class="text-muted">{{ publicacao.data_publicacao }}</p>
         </div>
+        <a href="{% url 'publicacao_detalhe' pk=publicacao.id %}" class="btn btn-primary">Compartilhar</a>
+        {% if user.is_authenticated and user == publicacao.autor %}
         <a href="{% url 'publicacao_delete' pk=publicacao.id %}" class="btn btn-danger">Excluir</a>
         <a href="{% url 'editar_publicacao' publicacao.id %}" class="btn btn-primary">Editar</a>
+        {% endif %}
+          
+       
       </div>
     {% endfor %}
   </div>

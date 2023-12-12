@@ -12,6 +12,7 @@ class HomeView(generic.ListView):
     template_name = "index.html"
 
 
+
 class PublicacaoCreateView(generic.CreateView):
     model = Publicacao
     form_class = PublicacaoForm
@@ -28,27 +29,12 @@ class PublicacaoDeleteView(generic.DeleteView):
     success_url = reverse_lazy('index')
     template_name = 'publicacao_confirm_delete.html'
 
-
-
 class PublicacaoUpdate(generic.UpdateView):
     model = Publicacao
     form_class = PublicacaoForm
     success_url = reverse_lazy('index')
     template_name = 'criar_plub.html'
-#   model = Reserva
-#   form_class = ReservaForm
-#   success_url = reverse_lazy("stands:reservas-list")
-#   template_name = "reservas_form.html"
 
-#class ReservaDeleteView(generic.DeleteView):
-#   model = Reserva
-#   success_url = reverse_lazy("stands:reservas-list")
-
-
-
-
-# class ReservaCreateView(generic.CreateView):
-#   model = Reserva
-#   form_class = ReservaForm
-#   success_url = reverse_lazy("stands:reservas-list")
-#   template_name = "reservas_form.html"
+class PublicacaoDetailView(generic.DetailView):
+    model = Publicacao
+    template_name = 'publicacao.html'
