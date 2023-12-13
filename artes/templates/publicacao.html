@@ -5,7 +5,13 @@
 
 <div class="container">
     <div class="card">
-        <h2>{{ publicacao.texto }}</h2>
+        
+        {% if publicacao.imagem %}
+          <img src="{{ publicacao.imagem.url }}" alt="Post Image" class="post-image" style="max-height: 300px; max-width: 600px;">
+        {% endif %}
+        <div class="post-content" style="margin-top: 10px;">
+          <p>{{ publicacao.texto }}</p>
+        </div>
 
         <p>Publicado por: {{ publicacao.autor.username }}</p>
         <p>Data de publicação: {{ publicacao.data_publicacao }}</p>
