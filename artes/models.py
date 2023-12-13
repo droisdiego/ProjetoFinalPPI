@@ -13,7 +13,7 @@ class Publicacao(models.Model):
     data_publicacao = models.DateTimeField(auto_now_add=True)
 
 
-class Pasta(models.Model):
+class Favoritos(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     publicacoes_salvas = models.ManyToManyField(Publicacao)
 

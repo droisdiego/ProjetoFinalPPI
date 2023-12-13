@@ -5,7 +5,7 @@ from .models import *
 class PublicacaoAdmin(admin.ModelAdmin):
     list_display = ('autor', 'texto', 'data_publicacao')
 
-@admin.register(Pasta)
+@admin.register(Favoritos)
 class PastaAdmin(admin.ModelAdmin):
     list_display = ('usuario',)
 
