@@ -32,5 +32,9 @@ urlpatterns = [
 
     path('perfil/<int:pk>/', ProfileView.as_view(), name='profile'),
     path('profile/update/', ProfileUpdateView.as_view(), name='profile_update'),
+
+    path('usuarios/', pesquisa, name='pesquisa'),
+
+    path('perfil/<str:username>/', ProfileView.as_view(), name='profile'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

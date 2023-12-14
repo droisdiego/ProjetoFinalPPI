@@ -93,3 +93,17 @@ def criar_usuario_perfil(request, user, **kwargs):
         UsuarioPerfil.objects.create(usuario=user)
 
 
+
+def pesquisa(request):
+    username = request.GET.get('username')
+    resultados = []
+
+    if username:
+        print(f'Pesquisando por: {username}')
+        resultados = UsuarioPerfil.objects.filter(usuario__username__icontains=username)
+
+    return render(request, 'usuarios.html', {'resultados': resultados, 'termo_pesquisa': username})
+
+def usuarios(request):
+    lista = UsuarioPerfil.objects.order_by('-id')
+    return render(request, 'usuarios.html', {'resultados': lista})

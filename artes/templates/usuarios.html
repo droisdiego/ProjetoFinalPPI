@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block center %}
+<style>
+    /* Seu código CSS existente */
+</style><div class="row py-5 px-4">
+    <div class="col-md-5 mx-auto">
+        {% if resultados %}
+            {% for usuario in resultados %}
+                <div class="mb-4">
+                    <div class="bg-white shadow rounded overflow-hidden" style="width: 300px;">
+                        <div style="display: flex; align-items: center;">
+                            <a href="{% url 'profile' usuario.usuario.pk %}">
+                                <img src="{{ usuario.icone.url }}" alt="{{ usuario.nome_social }}" perfil style="width: 150px; height: 150px; object-fit: cover;">
+                                <div style="margin-left: 10px;">
+                                    <h4>{{ usuario.usuario.username }}</h4>
+                                    <p>Pseudônimo: {{ usuario.pseudonimo }}</p>
+                                    <p>Biografia: {{ usuario.biografia }}</p>
+                                    <!-- Adicione outros campos que deseja mostrar -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum usuário encontrado.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock center %}

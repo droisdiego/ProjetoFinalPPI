@@ -1,3 +1,26 @@
+body {
+    padding-top: 56px; /* Ajuste para o posicionamento fixo do navbar */
+}
+
+.sidebar {
+    background-color: #f8f9fa;
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-link i {
+    margin-right: 8px;
+}
+
+
 /* .post-card {
     border: 1px solid #ddd;
     margin: 20px;
