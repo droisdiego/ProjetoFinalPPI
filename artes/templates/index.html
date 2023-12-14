@@ -6,11 +6,13 @@
   <h2>Lista de Publicações</h2>
   
   <div class="container">
-    {% for publicacao in object_list %}
+    {% for publicacao in publicacoes %}
       <div class="post-card" style="border: 1px solid black; margin: 20px; padding: 10px;">
         <div style="display: flex; align-items: center; ">
-          <img src="{{ publicacao.autor.usuarioperfil.profileimg.url }}" alt="Profile Picture" class="profile-pic">
-          <h5><a href="/profile/{{ publicacao.autor.username }}" style="text-decoration: none;">@{{ publicacao.autor.username }}</a></h5>
+          <a href="{% url 'profile' pk=publicacao.autor.pk %}" style="text-decoration: none;">
+            <img src="{{autor.icone.url}}" alt="Profile Picture" class="profile-pic">
+            <h5>@{{ publicacao.autor.username }}</h5>
+          </a>
         </div>
         {% if publicacao.imagem %}
           <img src="{{ publicacao.imagem.url }}" alt="Post Image" class="post-image" style="max-height: 300px; max-width: 600px;">
@@ -21,11 +23,9 @@
         </div>
         <a href="{% url 'publicacao_detalhe' pk=publicacao.id %}" class="btn btn-primary">Compartilhar</a>
         {% if user.is_authenticated and user == publicacao.autor %}
-        <a href="{% url 'publicacao_delete' pk=publicacao.id %}" class="btn btn-danger">Excluir</a>
-        <a href="{% url 'editar_publicacao' publicacao.id %}" class="btn btn-primary">Editar</a>
+          <a href="{% url 'publicacao_delete' pk=publicacao.id %}" class="btn btn-danger">Excluir</a>
+          <a href="{% url 'editar_publicacao' publicacao.id %}" class="btn btn-primary">Editar</a>
         {% endif %}
-          
-       
       </div>
     {% endfor %}
   </div>
