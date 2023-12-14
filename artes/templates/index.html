@@ -4,7 +4,18 @@
 
 {% block center %}
   <h2>Lista de Publicações</h2>
-  
+  {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <!-- Conteúdo a ser exibido apenas para o administrador -->
+            <p>Olá, asa!</p>
+            {% else %}
+            <!-- Conteúdo para usuários autenticados que não são administradores -->
+            <p>Bem-vindo, {{ user.username }}!</p>
+            {% endif %}
+            {% else %}
+            <!-- Conteúdo para usuários não autenticados -->
+            <p>Faça login para acessar recursos exclusivos.</p>
+            {% endif %}
   <div class="container">
     {% for publicacao in publicacoes %}
       <div class="post-card" style="border: 1px solid black; margin: 20px; padding: 10px;">
