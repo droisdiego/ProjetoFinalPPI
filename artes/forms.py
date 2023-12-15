@@ -24,7 +24,7 @@ class UsuarioPerfilForm(forms.ModelForm):
     class Meta:
         model = UsuarioPerfil
         fields = ['pseudonimo', 'nome_social', 'biografia', 'icone']
-        success_url = reverse_lazy('profile')  # Use reverse_lazy para evitar problemas de importação circular
+        success_url = reverse_lazy('profile')  
 
     def form_valid(self, form):
         # Lógica para processar o formulário

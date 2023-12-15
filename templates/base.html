@@ -52,7 +52,6 @@
             border: 2px dashed black;
             border-radius: 50%;
         }
-
     </style>
 </head>
 
@@ -62,7 +61,8 @@
             <nav class="col-md-2 d-none d-md-block sidebar" style="position: fixed;">
                 <div class="text-center mt-3">
                     {% if request.user.is_authenticated %}
-                    <img class="icone_user" src="{{request.user.usuarioperfil.icone.url}}" alt="">
+                    {%if request.user.usuarioperfil.icone.url == true %}
+                    <img class="icone_user" src="{{request.user.usuarioperfil.icone.url}}" alt="">{% endif %}
                     <p class="mt-2"><a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">
                             @{{ request.user }}</a></p>
                     {% else %}

@@ -2,30 +2,71 @@
 
 {% block center %}
 <style>
-    /* Seu código CSS existente */
-</style><div class="row py-5 px-4">
+    body {
+        background: #654ea3;
+        background: linear-gradient(to right, #e96443, #904e95);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        height: auto;
+        min-width: 500px;
+        max-width: 700px;
+        background-color: #6d6d6d42;
+    }
+
+    .perfil-imagem {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .dados-usuario {
+        margin-left: 10px;
+    }
+</style>
+<div class="row py-5 px-4">
     <div class="col-md-5 mx-auto">
-        {% if resultados %}
+        <div class="container">
+            {% if resultados %}
             {% for usuario in resultados %}
-                <div class="mb-4">
-                    <div class="bg-white shadow rounded overflow-hidden" style="width: 300px;">
-                        <div style="display: flex; align-items: center;">
+            <div class="mb-4">
+                <div class="bg-white shadow rounded overflow-hidden">
+                    <div class="row">
+                        <div class="col-md-4">
                             <a href="{% url 'profile' usuario.usuario.pk %}">
-                                <img src="{{ usuario.icone.url }}" alt="{{ usuario.nome_social }}" perfil style="width: 150px; height: 150px; object-fit: cover;">
-                                <div style="margin-left: 10px;">
+                                <img src="{{ usuario.icone.url }}" alt="{{ usuario.nome_social }}" class="perfil-imagem">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card dados-usuario">
+                                <a href="{% url 'profile' usuario.usuario.pk %}">
                                     <h4>{{ usuario.usuario.username }}</h4>
                                     <p>Pseudônimo: {{ usuario.pseudonimo }}</p>
                                     <p>Biografia: {{ usuario.biografia }}</p>
                                     <!-- Adicione outros campos que deseja mostrar -->
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             {% endfor %}
-        {% else %}
+            {% else %}
             <p>Nenhum usuário encontrado.</p>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </div>
 

@@ -75,20 +75,11 @@ class ProfileView(generic.DetailView):
         return context
 
 
-
-# class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
-#     model = UsuarioPerfil
-#     template_name = "profile.html"
-#     fields = ["profileimg", "bio", "location"]
-#     success_url = reverse_lazy("profile")  # Redirect to the profile page after updating
-
-#     def get_object(self, queryset=None):
-#         return UsuarioPerfil.objects.get(user=self.request.user)
 class UsuarioPerfilUpdateView(generic.UpdateView):
     model = UsuarioPerfil
-    form_class = UsuarioPerfilForm  # Substitua pelo nome do seu formulário
-    template_name = 'profile_upload.html'  # Substitua pelo nome do seu template
-    success_url = reverse_lazy('index')  # Substitua pelo nome da sua URL de sucesso
+    form_class = UsuarioPerfilForm  
+    template_name = 'profile_upload.html'  
+    success_url = reverse_lazy('index')  
     
 
 @receiver(user_signed_up)
