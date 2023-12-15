@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.account.signals import user_signed_up, user_logged_in
 from django.dispatch import receiver
+from django.db.models import Q
 
 
 User = get_user_model()
@@ -96,7 +97,7 @@ def pesquisa(request):
 
     if username:
         print(f'Pesquisando por: {username}')
-        resultados = UsuarioPerfil.objects.filter(usuario__username__icontains=username)
+        resultados = UsuarioPerfil.objects.filter( Q(usuario__username__icontains=username) | Q(pseudonimo__icontains=username))
 
     return render(request, 'usuarios.html', {'resultados': resultados, 'termo_pesquisa': username})
 
