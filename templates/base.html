@@ -16,10 +16,21 @@
     <title>Social Media</title>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <style>
+        body {
+            margin-top: 0;
+            /* Remover a margem superior padrão do corpo */
+        }
+
+        .main {
+            margin-top: 0;
+            /* Remover margem superior do conteúdo principal */
+        }
+
         .sidebar {
             background-color: #f8f9fa;
             height: 100vh;
             color: black;
+            top: 0;
         }
 
         .profile-pic {
@@ -32,6 +43,15 @@
         a {
             color: black;
         }
+
+        .icone_user {
+            margin: 0px;
+            height: 50px;
+            width: 50px;
+            background-color: #000;
+            border: 2px dashed black;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -39,7 +59,15 @@
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-2 d-none d-md-block sidebar" style="position: fixed;">
-                
+                <div class="text-center mt-3">
+                    {% if request.user.is_authenticated %}
+                    <img class="icone_user" src="{{request.user.usuarioperfil.icone.url}}" alt="">
+                    <p class="mt-2"><a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">
+                        @{{ request.user }}</a></p>
+                    {% else %}
+                    <h4 class="mt-2">Anônimo</h4>
+                    {% endif %}
+                </div>
                 <ul class="nav flex-column mt-4">
                     <li class="nav-item">
                         <form method="get" action="{% url 'pesquisa' %}">
@@ -47,25 +75,25 @@
                             <input type="text" name="username" id="username" value="{{ termo_pesquisa }}" required>
                             <button type="submit">Pesquisar</button>
                         </form>
-                        
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'index' %}">
                             <i class="fa-solid fa-house mr-1"></i> Início
                         </a>
                     </li>
-                    
-                    
+
+
                     {% if user.is_authenticated %}
-                      <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'criar_publicacao' %}">
                             <i class="fa-solid fa-circle-plus mr-1"></i> Publicar Arte
                         </a>
-                    </li>  
+                    </li>
                     {% endif %}
-                        
-                    
-                    
+
+
+
                     <li class="nav-item">
                         <div>
                             {% if user.is_authenticated %}
@@ -82,15 +110,8 @@
                             {% endif %}
                         </div>
                     </li>
-                </ul><div class="text-center mt-3">
-                    {% if request.user.is_authenticated %}
-                    <img src="{{request.user.usuarioperfil.icone.url}}" alt="" style="max-width: 75px;max-height: 75px;">
-                        <p class="mt-2">Logado como: <a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">{{ request.user }}</a></p>
-                    {% else %}
-                        <h4 class="mt-2">Anônimo</h4>
-                    {% endif %}
-                </div>
-                
+                </ul>
+
             </nav>
             <!-- this is the main content code -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -102,9 +123,9 @@
                 <!-- home posts code -->
 
                 {% block center %}
-                  
+
                 {% endblock center %}
-                  
+
             </main>
         </div>
     </div>
