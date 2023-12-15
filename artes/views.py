@@ -35,9 +35,9 @@ class PublicacaoCreateView(generic.CreateView):
     template_name = "criar_plub.html"
 
     def form_valid(self, form):
-        # Antes de salvar, defina o autor como o usuário autenticado
-        form.instance.autor = self.request.user
-        return super().form_valid(form)
+       usuario_perfil = UsuarioPerfil.objects.get(usuario=self.request.user)
+       form.instance.autor = usuario_perfil
+       return super().form_valid(form)
 
 
 class PublicacaoDeleteView(generic.DeleteView):
@@ -66,8 +66,8 @@ class ProfileView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         user_object = self.get_object()
-        user_posts = Publicacao.objects.filter(autor=user_object).order_by("-data_publicacao")
         usuario_perfil = get_object_or_404(UsuarioPerfil, usuario=user_object)
+        user_posts = Publicacao.objects.filter(autor=usuario_perfil).order_by("-data_publicacao")
 
         context["user_posts"] = user_posts
         context["profile_user"] = user_object
@@ -76,15 +76,20 @@ class ProfileView(generic.DetailView):
 
 
 
-class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+# class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     model = UsuarioPerfil
+#     template_name = "profile.html"
+#     fields = ["profileimg", "bio", "location"]
+#     success_url = reverse_lazy("profile")  # Redirect to the profile page after updating
+
+#     def get_object(self, queryset=None):
+#         return UsuarioPerfil.objects.get(user=self.request.user)
+class UsuarioPerfilUpdateView(generic.UpdateView):
     model = UsuarioPerfil
-    template_name = "profile.html"
-    fields = ["profileimg", "bio", "location"]
-    success_url = reverse_lazy("profile")  # Redirect to the profile page after updating
-
-    def get_object(self, queryset=None):
-        return UsuarioPerfil.objects.get(user=self.request.user)
-
+    form_class = UsuarioPerfilForm  # Substitua pelo nome do seu formulário
+    template_name = 'profile_upload.html'  # Substitua pelo nome do seu template
+    success_url = reverse_lazy('index')  # Substitua pelo nome da sua URL de sucesso
+    
 
 @receiver(user_signed_up)
 @receiver(user_logged_in)

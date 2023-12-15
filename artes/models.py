@@ -4,30 +4,35 @@ from allauth.account.models import EmailAddress
 
 User = get_user_model()
 
+class UsuarioPerfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    pseudonimo = models.CharField(max_length=50)
+    nome_social = models.CharField(max_length=50, blank=True, null=True)
+    biografia = models.TextField(blank=True, null=True)
+    icone = models.ImageField(upload_to='midia', default='')
+
+    def get_email(self):
+        return EmailAddress.objects.get(user=self.usuario).email if EmailAddress.objects.filter(user=self.usuario, primary=True, verified=True).exists() else None
+    
+    def __str__(self):
+        return f"{self.usuario.username} - {self.pseudonimo}"
+    
+
 class Publicacao(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(UsuarioPerfil, on_delete=models.CASCADE)
     texto = models.TextField(null=True, blank=True)
     audio = models.FileField(upload_to='uploads/', null=True, blank=True)
     imagem = models.ImageField(upload_to='uploads/', null=True, blank=True)
     video = models.FileField(upload_to='uploads/', null=True, blank=True)
     data_publicacao = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.id} - {self.texto[:20]}"
 
 
 class Favoritos(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     publicacoes_salvas = models.ManyToManyField(Publicacao)
 
-
-class UsuarioPerfil(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    pseudonimo = models.CharField(max_length=50)
-    nome_social = models.CharField(max_length=50, blank=True, null=True)
-    biografia = models.TextField(blank=True, null=True)
-    icone = models.ImageField(upload_to='midia', default='midia/user_icon.png')
-
-    def get_email(self):
-        return EmailAddress.objects.get(user=self.usuario).email if EmailAddress.objects.filter(user=self.usuario, primary=True, verified=True).exists() else None
-    
 
 class Denuncia(models.Model):
     publicacao_denunciada = models.ForeignKey(Publicacao, on_delete=models.CASCADE)

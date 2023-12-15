@@ -1,6 +1,7 @@
 # artes/forms.py
 from django import forms
-from .models import Publicacao
+from django.urls import reverse_lazy
+from .models import *
 
 class PublicacaoForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,14 @@ class PublicacaoForm(forms.ModelForm):
         # Elementos de audio e video foram retirados por questão de tempo para versão 1.0, possibilidade de adição em futura atualização
         if not any([texto, imagem]):
             raise forms.ValidationError('Pelo menos um dos elementos (texto, áudio, imagem ou vídeo) deve estar presente.')
+        
+
+class UsuarioPerfilForm(forms.ModelForm):
+    class Meta:
+        model = UsuarioPerfil
+        fields = ['pseudonimo', 'nome_social', 'biografia', 'icone']
+        success_url = reverse_lazy('profile')  # Use reverse_lazy para evitar problemas de importação circular
+
+    def form_valid(self, form):
+        # Lógica para processar o formulário
+        return super().form_valid(form)

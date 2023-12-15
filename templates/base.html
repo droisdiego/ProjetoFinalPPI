@@ -40,15 +40,13 @@
         <div class="row">
             <nav class="col-md-2 d-none d-md-block sidebar" style="position: fixed;">
                 <div class="text-center mt-3">
-                    
-                    {% if request.user.is_authenticated%}
-                        <img src="{{profile.profileimg.url}}" alt="Profile Picture" class="profile-pic">
-                        <h4 class="mt-2"><a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">@{{request.user}}</a></h4>
+                    {% if request.user.is_authenticated %}
+                        <p class="mt-2">Logado como: <a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">{{ request.user }}</a></p>
                     {% else %}
-                        <h4 class="mt-2">Anonimo</h4>
+                        <h4 class="mt-2">Anônimo</h4>
                     {% endif %}
-                        
                 </div>
+                
                 <ul class="nav flex-column mt-4">
                     <li class="nav-item">
                         <form method="get" action="{% url 'pesquisa' %}">

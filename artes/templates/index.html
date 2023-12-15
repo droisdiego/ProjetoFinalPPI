@@ -20,9 +20,9 @@
     {% for publicacao in publicacoes %}
       <div class="post-card" style="border: 1px solid black; margin: 20px; padding: 10px;">
         <div style="display: flex; align-items: center; ">
-          <a href="{% url 'profile' pk=publicacao.autor.pk %}" style="text-decoration: none;">
-            <img src="{{autor.icone.url}}" alt="Profile Picture" class="profile-pic">
-            <h5>@{{ publicacao.autor.username }}</h5>
+          <a href="{% url 'profile' pk=publicacao.autor.usuario.pk %}" style="text-decoration: none;">
+            <img src="{{ publicacao.autor.icone.url }}" alt="Profile Picture" class="profile-pic">
+            <h5>@{{ publicacao.autor.pseudonimo }}</h5>
           </a>
         </div>
         {% if publicacao.imagem %}
