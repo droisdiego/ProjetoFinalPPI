@@ -15,7 +15,7 @@ class UsuarioPerfil(models.Model):
         return EmailAddress.objects.get(user=self.usuario).email if EmailAddress.objects.filter(user=self.usuario, primary=True, verified=True).exists() else None
     
     def __str__(self):
-        return f"{self.usuario.username} - {self.pseudonimo}"
+        return f"{self.usuario.username}"
     
 
 class Publicacao(models.Model):

@@ -13,12 +13,13 @@
           <p>{{ publicacao.texto }}</p>
         </div>
 
-        <p>Publicado por: {{ publicacao.autor.username }}</p>
+        <p>Publicado por: {{ publicacao.autor }}</p>
         <p>Data de publicação: {{ publicacao.data_publicacao }}</p>
 
         <!-- Adicione outros detalhes da publicação conforme necessário -->
     </div>
-    {% if user.is_authenticated and user == publicacao.autor %}
+    {% if request.user.is_authenticated and user == object.autor.usuario%}
+
     <a href="{% url 'publicacao_delete' pk=publicacao.id %}" class="btn btn-danger">Excluir</a>
     <a href="{% url 'editar_publicacao' publicacao.id %}" class="btn btn-primary">Editar</a>
     {% endif %}
