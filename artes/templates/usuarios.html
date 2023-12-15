@@ -2,11 +2,8 @@
 
 {% block center %}
 <style>
-    body {
-        background: #654ea3;
-        background: linear-gradient(to right, #e96443, #904e95);
-    }
-
+    
+    
     .container {
         display: flex;
         flex-direction: column;
@@ -22,7 +19,7 @@
         height: auto;
         min-width: 500px;
         max-width: 700px;
-        background-color: #6d6d6d;
+        background-color: rgba(226, 226, 226, 0.8); 
     }
 
     .perfil-imagem {
@@ -35,6 +32,7 @@
     .dados-usuario {
         margin-left: 10px;
     }
+    
 </style>
 <div class="row py-5 px-4">
     <div class="col-md-5 mx-auto">
@@ -44,7 +42,7 @@
             <div class="mb-4">
                 <div class="bg-white shadow rounded overflow-hidden">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="border-radius: 50%;">
                             <a href="{% url 'profile' usuario.usuario.pk %}">
                                 
                                 {% if usuario.icone.url %}
