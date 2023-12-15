@@ -18,7 +18,7 @@
 
         <!-- Adicione outros detalhes da publicação conforme necessário -->
     </div>
-    {% if request.user.is_authenticated and user == object.autor.usuario%}
+    {% if request.user.is_authenticated and user == object.autor.usuario or request.user.is_superuser%}
 
     <a href="{% url 'publicacao_delete' pk=publicacao.id %}" class="btn btn-danger">Excluir</a>
     <a href="{% url 'editar_publicacao' publicacao.id %}" class="btn btn-primary">Editar</a>
