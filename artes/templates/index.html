@@ -3,28 +3,92 @@
 {% extends 'base.html' %}
 
 {% block center %}
-  <h2>Novas Publicações</h2>
-  
-  <div class="container">
-    {% for publicacao in publicacoes %}
-      <div class="post-card" style="border: 1px solid black; margin: 20px; padding: 10px;">
-        <div style="display: flex; align-items: center; ">
-          <a href="{% url 'profile' pk=publicacao.autor.usuario.pk %}" style="text-decoration: none;">
-            <img src="{{ publicacao.autor.icone.url }}" alt="Profile Picture" class="profile-pic">
-            <h5>@{{ publicacao.autor.pseudonimo }}</h5>
-          </a>
-        </div>
-        {% if publicacao.imagem %}
-          <img src="{{ publicacao.imagem.url }}" alt="Post Image" class="post-image" style="max-height: 300px; max-width: 600px;">
-        {% endif %}
-        <div class="post-content" style="margin-top: 10px;">
-          <p>{{ publicacao.texto }}</p>
-          <p class="text-muted">{{ publicacao.data_publicacao }}</p>
-        </div>
-        <a href="{% url 'publicacao_detalhe' pk=publicacao.id %}" class="btn btn-primary">Detalhar...</a>
-        
-      </div>
-    {% endfor %}
+<style>
+  body {
+    background: #654ea3;
+    background: linear-gradient(to right, #e96443, #904e95);
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-publicacao {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    height: auto;
+    width: 700px;
+
+  }
+
+  .autor-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .post-image {
+    max-height: 300px;
+    max-width: 600px;
+    margin-bottom: 10px;
+  }
+
+  .post-content {
+    margin-top: 10px;
+  }
+
+  .detalhar-btn {
+    margin-top: 10px;
+  }
+
+  .card-publicacao h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .card-publicacao h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+</style>
+
+
+<div class="publicacoes-container">
+<h2>Novas Publicações</h2>
+
+<div class="container">
+  {% for publicacao in publicacoes %}
+  <div class="card-publicacao">
+    <div class="autor-info">
+      <a href="{% url 'profile' pk=publicacao.autor.usuario.pk %}" style="text-decoration: none;">
+        <img src="{{ publicacao.autor.icone.url }}" alt="Profile Picture" class="profile-pic">
+        <h5>@{{ publicacao.autor.pseudonimo }}</h5>
+      </a>
+    </div>
+
+    {% if publicacao.imagem %}
+    <img src="{{ publicacao.imagem.url }}" alt="Post Image" class="post-image">
+    {% endif %}
+
+    <div class="post-content">
+      <p>{{ publicacao.texto }}</p>
+      <p class="text-muted">{{ publicacao.data_publicacao }}</p>
+    </div>
+
+    <div class="detalhar-btn">
+      <a href="{% url 'publicacao_detalhe' pk=publicacao.id %}" class="btn btn-primary">Detalhar...</a>
+    </div>
   </div>
 
+  {% endfor %}
+</div>
+</div>
 {% endblock %}

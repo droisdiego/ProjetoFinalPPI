@@ -52,6 +52,7 @@
             border: 2px dashed black;
             border-radius: 50%;
         }
+
     </style>
 </head>
 
@@ -63,7 +64,7 @@
                     {% if request.user.is_authenticated %}
                     <img class="icone_user" src="{{request.user.usuarioperfil.icone.url}}" alt="">
                     <p class="mt-2"><a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">
-                        @{{ request.user }}</a></p>
+                            @{{ request.user }}</a></p>
                     {% else %}
                     <h4 class="mt-2">Anônimo</h4>
                     {% endif %}
@@ -72,9 +73,12 @@
                     <li class="nav-item">
                         <form method="get" action="{% url 'pesquisa' %}" class="search-form">
                             <div class="input-group">
-                                <input type="text" name="username" id="username" value="{{ termo_pesquisa }}" required class="form-control" placeholder="Pesquisar Usuario...">
+                                <input type="text" name="username" id="username" value="{{ termo_pesquisa }}" required
+                                    class="form-control" placeholder="Pesquisar Usuario...">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary"><img src="https://cdn-icons-png.flaticon.com/512/149/149852.png" alt="" style="height: 20px;width: 20px;"></button>
+                                    <button type="submit" class="btn btn-primary"><img
+                                            src="https://cdn-icons-png.flaticon.com/512/149/149852.png" alt=""
+                                            style="height: 20px;width: 20px;"></button>
                                 </div>
                             </div>
                         </form>
