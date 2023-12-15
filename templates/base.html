@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/cb792c0850.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="icon" href="{% static 'midia/logoNuartePretoFundo.png' %}" type="image/png">
     <title>Onuarte</title>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <style>
@@ -22,12 +22,8 @@
 
         }
 
-        /* Remover a margem superior padrão do corpo */
-
-
         .main {
             margin-top: 0;
-            /* Remover margem superior do conteúdo principal */
         }
 
         .sidebar {
@@ -55,6 +51,17 @@
             background-color: #000;
             border: 2px dashed black;
             border-radius: 50%;
+        }
+
+        .nuarte_card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+            height: auto;
+            width: 150px;
+
         }
     </style>
 </head>
@@ -122,8 +129,10 @@
                             {% endif %}
                         </div>
                     </li>
-                </ul>
+                    <li>
 
+                    </li>
+                </ul>
             </nav>
             <!-- this is the main content code -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -132,7 +141,11 @@
                 {% include "modal.html" %}
                 {% include "search.html" %}
 
+                <div class="nuarte_card">
+                    <img src="{% static 'midia/logoNuartePretoFundo.png' %}" alt="" style="height: 50px;"> ONUARTE
+                </div>
                 <!-- home posts code -->
+
 
                 {% block center %}
 
@@ -141,8 +154,8 @@
             </main>
         </div>
     </div>
-
-    <script src="{% static 'js/app.js'%}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+</body>
+<script src="{% static 'js/app.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
