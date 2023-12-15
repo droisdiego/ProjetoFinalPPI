@@ -84,7 +84,7 @@
                     </li>
                 </ul><div class="text-center mt-3">
                     {% if request.user.is_authenticated %}
-                    <img src="{{request.user.usuarioperfil.icone.url}}" alt="">
+                    <img src="{{request.user.usuarioperfil.icone.url}}" alt="" style="max-width: 75px;max-height: 75px;">
                         <p class="mt-2">Logado como: <a href="{% url 'profile' pk=request.user.pk %}" style="text-decoration:none;">{{ request.user }}</a></p>
                     {% else %}
                         <h4 class="mt-2">Anônimo</h4>
