@@ -9,7 +9,7 @@ class UsuarioPerfil(models.Model):
     pseudonimo = models.CharField(max_length=50)
     nome_social = models.CharField(max_length=50, blank=True, null=True)
     biografia = models.TextField(blank=True, null=True)
-    icone = models.ImageField(upload_to='midia', default='')
+    icone = models.ImageField(upload_to='midia', default='midia/abstract-user-flat-3.png',null=True, blank=True)
 
     def get_email(self):
         return EmailAddress.objects.get(user=self.usuario).email if EmailAddress.objects.filter(user=self.usuario, primary=True, verified=True).exists() else None
