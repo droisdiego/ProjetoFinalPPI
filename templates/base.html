@@ -70,10 +70,13 @@
                 </div>
                 <ul class="nav flex-column mt-4">
                     <li class="nav-item">
-                        <form method="get" action="{% url 'pesquisa' %}">
-                            <label for="username">Nome de Usuário:</label>
-                            <input type="text" name="username" id="username" value="{{ termo_pesquisa }}" required>
-                            <button type="submit">Pesquisar</button>
+                        <form method="get" action="{% url 'pesquisa' %}" class="search-form">
+                            <div class="input-group">
+                                <input type="text" name="username" id="username" value="{{ termo_pesquisa }}" required class="form-control" placeholder="Pesquisar Usuario...">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary"><img src="https://cdn-icons-png.flaticon.com/512/149/149852.png" alt="" style="height: 20px;width: 20px;"></button>
+                                </div>
+                            </div>
                         </form>
 
                     </li>
