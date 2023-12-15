@@ -29,8 +29,10 @@
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
                     <div class="profile mr-3"><img src="{{ usuario_perfil.icone.url }}" alt="..." width="130"
-                            class="rounded mb-2 img-thumbnail"><a href="{% url 'editar_perfil' pk=usuario_perfil.pk %}"
-                            class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
+                            class="rounded mb-2 img-thumbnail">
+                            {% if user.is_authenticated and request.user == profile_user%}
+                            <a href="{% url 'editar_perfil' pk=usuario_perfil.pk %}"
+                            class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>{%endif%}</div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">@{{profile_user.username}}</h4>
                         {% if request.user.is_authenticated %}
